@@ -17,7 +17,7 @@ public class InstituicaoDao {
 	private static final String UPDATE = "UPDATE INSTITUICAO SET NOME = ?, ENDERECO = ?, CNPJ = ?, TELEFONE = ?, COMPLEMENTO = ? WHERE CODIGO = ?";
 	private static final String SELECT = "SELECT * FROM INSTITUICAO";
 	private static final String SELECT_ID = "SELECT * FROM INSTITUICAO WHERE CODIGO = ?";
-	//private static final String SELECT_NOME = "SELECT * FROM INSTITUICAO WHERE NOME = ?";
+	private static final String SELECT_NOME = "SELECT * FROM INSTITUICAO WHERE NOME = ?";
 	
 	
 	public boolean inserirInstituicao(Instituicao instituicao) {
