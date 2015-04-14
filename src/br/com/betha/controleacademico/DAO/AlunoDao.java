@@ -1,12 +1,188 @@
 package br.com.betha.controleacademico.DAO;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JOptionPane;
+
+import br.com.betha.controleacademico.modelo.Aluno;
+import br.com.betha.controleacademico.modelo.Instituicao;
+import br.com.betha.controleacademico.modelo.NivelEnsino;
+
 public class AlunoDao {
 	
-	private static final String INSERT = "";
-	private static final String DELETE = "";
-	private static final String UPDATE = "";
-	private static final String LIST = "";
-	private static final String LIST_ID = "";
+	private static final String INSERT = "insert into Aluno (codigo, nome, cpf, matricula, telefone, email, nivel) values (SEQ_ALUNO.nextval, ?, ?, ?, ?, ?, ?)";
+	private static final String DELETE = "delete from aluno where codigo = ?";
+	private static final String UPDATE = "update aluno set nome = ?, cpf = ?, matricula = ?, telefone = ?, email = ?, nivel = ? where codigo = ?";
+	private static final String LIST = "select * from aluno";
+	private static final String LIST_ID = "select * from aluno where codigo = ?";
 	private static final String LIST_TITULO = "";
+	
+	public boolean inserirALuno(Aluno aluno) {
+
+		Connection con = null;
+
+		try {
+			con = Conexao.setConexao();
+			PreparedStatement pstm = con.prepareStatement(INSERT);
+				
+			pstm.setString(1, aluno.getNome());
+			pstm.setInt(2, aluno.getCpf());
+			pstm.setInt(3, aluno.getMatricula());
+			pstm.setString(4, aluno.getTelefone());
+			pstm.setString(5, aluno.getEmail());
+			
+			pstm.setString(6, aluno.getTelefone());
+
+			pstm.execute();
+			
+			JOptionPane.showMessageDialog(null,"Aluno inserido com sucesso");
+			return true;
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null,"Não foi possível realizar a inserção");
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				con.close();
+			} catch (Exception e2) {
+				System.out.println("Erro ao fechar a conexão");
+			}
+		}
+		return false;
+	}
+	
+	public boolean removerAluno(int codigo) {
+
+		Connection con = null;
+
+		try {
+			con = Conexao.setConexao();
+			PreparedStatement pstm = con.prepareStatement(DELETE);
+			pstm.setInt(1, codigo);
+			pstm.execute();
+			
+			JOptionPane.showMessageDialog(null, "Aluno removido com sucesso");
+			return true;
+			
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Não foi possível realizar a exclusão");
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				con.close();
+			} catch (Exception e2) {
+				System.out.println("Erro ao fechar a conexão");
+			}
+		}
+		return false;
+	}
+	
+	public boolean editarAluno(Aluno aluno) {
+
+		Connection con = null;
+
+		try {
+			con = Conexao.setConexao();
+			PreparedStatement pstm = con.prepareStatement(UPDATE);
+			
+			pstm.setString(1, aluno.getNome());
+			pstm.setInt(2, aluno.getCpf());
+			pstm.setInt(3, aluno.getMatricula());
+			pstm.setString(4, aluno.getTelefone());
+			pstm.setString(5, aluno.getEmail());
+			pstm.setString(6, aluno.getTelefone());
+			pstm.setInt(7, aluno.getCodigo());
+			
+			pstm.execute();
+			
+			JOptionPane.showMessageDialog(null, "Aluno alterado com sucesso");
+			return true;
+			
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Não foi possível realizar a alteração");
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				con.close();
+			} catch (Exception e2) {
+				System.out.println("Erro ao fechar a conexão");
+			}
+		}
+		return false;
+	}
+	
+	public List<Aluno> listarAluno() {
+
+		Connection con = null;
+		List<Aluno> alunos = new ArrayList<>();
+
+		try {
+			con = Conexao.setConexao();
+			PreparedStatement pstm = con.prepareStatement(LIST);
+			ResultSet rs = pstm.executeQuery();
+			while (rs.next()) {
+				Aluno al = new Aluno();
+				al.setCodigo(rs.getInt("codigo"));
+				al.setNome(rs.getString("nome"));
+				al.setCpf(rs.getInt("cpf"));
+				al.setEndereco(rs.getString("matricula"));
+				al.setEndereco(rs.getString("endereco"));
+				
+				al.setTelefone(rs.getString("telefone"));
+				al.setEmail(rs.getString("email"));
+				alunos.add(al);
+			}
+			return alunos;
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Não foi possível listar os alunos");
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				con.close();
+			} catch (Exception e2) {
+				System.out.println("Erro ao fechar a conexão");
+			}
+		}
+		return null;
+	}
+
+	public Aluno listarCodigo(int codigo) {
+
+		Connection con = null;
+		Aluno al = new Aluno();
+
+		try {
+			con = Conexao.setConexao();
+			PreparedStatement pstm = con.prepareStatement(LIST_ID);
+			pstm.setInt(1, codigo);
+			ResultSet rs = pstm.executeQuery();
+			
+			while (rs.next()) {
+				al.setCodigo(rs.getInt("codigo"));
+				al.setNome(rs.getString("nome"));
+				al.setEndereco(rs.getString("endereco"));
+				al.setCpf(rs.getInt("cpf"));
+				al.setTelefone(rs.getString("telefone"));
+				al.setEmail(rs.getString("email"));
+			}
+			return al;
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Não foi possível encontrar a aluno");
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				con.close();
+			} catch (Exception e2) {
+				System.out.println("Erro ao fechar a conexão");
+			}
+		}
+		return null;
+	}
+	
+	
 
 }

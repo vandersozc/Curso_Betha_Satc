@@ -29,9 +29,10 @@ public class ListaInstituicao extends JFrame {
 	private JTable tabela;
 
 	public ListaInstituicao() {
+		setResizable(false);
 		setTitle("Lista de Instituições");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 725, 393);
+		setBounds(100, 100, 715, 427);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -40,19 +41,9 @@ public class ListaInstituicao extends JFrame {
 		JPanel painelFundo = new JPanel();
 		painelFundo.setBackground(Color.WHITE);
 		painelFundo.setForeground(Color.BLACK);
-		painelFundo.setBounds(0, 0, 709, 355);
+		painelFundo.setBounds(0, 0, 711, 399);
 		contentPane.add(painelFundo);
 		painelFundo.setLayout(null);
-
-		JPanel panelInferior = new JPanel();
-		panelInferior.setBackground(new Color(135, 206, 250));
-		panelInferior.setBounds(0, 333, 709, 24);
-		painelFundo.add(panelInferior);
-
-		JLabel lblDesenvolvidoPorVanderson = new JLabel("Desenvolvido por Vanderson Campanholi");
-		lblDesenvolvidoPorVanderson.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		lblDesenvolvidoPorVanderson.setForeground(new Color(0, 0, 0));
-		panelInferior.add(lblDesenvolvidoPorVanderson);
 		
 		JButton btnNewButton = new JButton("Novo");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -64,7 +55,7 @@ public class ListaInstituicao extends JFrame {
 				
 			}
 		});
-		btnNewButton.setBounds(11, 58, 76, 23);
+		btnNewButton.setBounds(10, 71, 76, 23);
 		painelFundo.add(btnNewButton);
 		
 		JButton btnEditar = new JButton("Editar");
@@ -88,7 +79,7 @@ public class ListaInstituicao extends JFrame {
 			}
 		});
 		
-		btnEditar.setBounds(97, 58, 76, 23);
+		btnEditar.setBounds(96, 71, 76, 23);
 		painelFundo.add(btnEditar);
 		
 		JButton btnExcluir = new JButton("Excluir");
@@ -113,7 +104,7 @@ public class ListaInstituicao extends JFrame {
 				
 			}
 		});
-		btnExcluir.setBounds(185, 58, 76, 23);
+		btnExcluir.setBounds(184, 71, 76, 23);
 		painelFundo.add(btnExcluir);
 
 		TextField textField = new TextField();
@@ -133,12 +124,12 @@ public class ListaInstituicao extends JFrame {
 				}
 			}
 		});
-		textField.setBounds(267, 59, 285, 22);
+		textField.setBounds(266, 72, 433, 22);
 		painelFundo.add(textField);
 		
 		criaTabela();
 		JScrollPane scrollPane = new JScrollPane(tabela);
-		scrollPane.setBounds(10, 92, 689, 238);
+		scrollPane.setBounds(10, 105, 689, 269);
 		painelFundo.add(scrollPane);
 		
 				JLabel lblCadastroDeLivros = new JLabel("Lista de Institui\u00E7\u00F5es");
@@ -146,6 +137,16 @@ public class ListaInstituicao extends JFrame {
 				painelFundo.add(lblCadastroDeLivros);
 				lblCadastroDeLivros.setFont(new Font("Tahoma", Font.BOLD, 16));
 				lblCadastroDeLivros.setForeground(new Color(0, 0, 0));
+				
+				JPanel panel = new JPanel();
+				panel.setBackground(new Color(176, 224, 230));
+				panel.setBounds(0, 0, 709, 55);
+				painelFundo.add(panel);
+				
+						JPanel panelInferior = new JPanel();
+						panelInferior.setBounds(0, 375, 709, 24);
+						painelFundo.add(panelInferior);
+						panelInferior.setBackground(new Color(176, 224, 230));
 
 	}
 

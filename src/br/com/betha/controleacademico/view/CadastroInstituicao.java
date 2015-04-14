@@ -53,9 +53,10 @@ public class CadastroInstituicao extends JFrame {
 	 * Create the frame.
 	 */
 	public CadastroInstituicao() {
+		setResizable(false);
 		setTitle("Cadastro de Instituições de Ensino");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 607, 363);
+		setBounds(100, 100, 627, 414);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -64,134 +65,143 @@ public class CadastroInstituicao extends JFrame {
 		JPanel painelFundo = new JPanel();
 		painelFundo.setBackground(Color.WHITE);
 		painelFundo.setForeground(Color.BLACK);
-		painelFundo.setBounds(0, 0, 591, 325);
+		painelFundo.setBounds(0, 0, 621, 387);
 		contentPane.add(painelFundo);
 		painelFundo.setLayout(null);
 
 		JPanel panelInferior = new JPanel();
-		panelInferior.setBackground(new Color(176, 196, 222));
-		panelInferior.setBounds(0, 304, 591, 21);
+		panelInferior.setBackground(new Color(176, 224, 230));
+		panelInferior.setBounds(0, 332, 621, 55);
 		painelFundo.add(panelInferior);
+				panelInferior.setLayout(null);
+		
+				JButton btnSalvar = new JButton("Salvar");
+				btnSalvar.setBounds(399, 11, 83, 25);
+				panelInferior.add(btnSalvar);
+				btnSalvar.setFont(new Font("Tahoma", Font.BOLD, 13));
+				
+						JButton btnLimpar = new JButton("Limpar");
+						btnLimpar.setBounds(492, 11, 83, 25);
+						panelInferior.add(btnLimpar);
+						btnLimpar.setFont(new Font("Tahoma", Font.BOLD, 13));
+						btnLimpar.addActionListener(new ActionListener() {
 
-		JLabel lblDesenvolvidoPorVanderson = new JLabel("Desenvolvido por Vanderson Campanholi");
-		lblDesenvolvidoPorVanderson.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		lblDesenvolvidoPorVanderson.setForeground(new Color(0, 0, 0));
-		panelInferior.add(lblDesenvolvidoPorVanderson);
+							public void actionPerformed(ActionEvent arg0) {
+
+								txCodigo.setText("");
+								txNome.setText("");
+								txEndereco.setText("");
+								txCnpj.setText("");
+								txTelefone.setText("");
+								txComplemento.setText("");
+
+							}
+						});
+				
+						btnSalvar.addActionListener(new ActionListener() {
+				
+							public void actionPerformed(ActionEvent arg0) {
+								
+								Instituicao inst = new Instituicao();
+								inst.setNome(txNome.getText());
+								inst.setEndereco(txEndereco.getText());
+								inst.setCnpj(txCnpj.getText());
+								inst.setTelefone(txTelefone.getText());
+								inst.setComplemento(txComplemento.getText());
+								
+								InstituicaoDao dao = new InstituicaoDao();
+								
+								if (!txCodigo.getText().equals("")) {
+									inst.setCodigo(Integer.parseInt(txCodigo.getText()));
+									if (dao.editarInstituicao(inst)) {
+										modelo.removeRow(linhaSelecionada);
+										modelo.addRow(new Object[] { inst.getCodigo(),
+												                     inst.getNome(),
+												                     inst.getEndereco(),
+												                     inst.getCnpj(),
+												                     inst.getTelefone()});
+									}
+								} else {
+									dao.inserirInstituicao(inst);
+									ListaInstituicao lista = new ListaInstituicao();
+									lista.setVisible(true);
+								}
+								dispose();
+							}
+							
+						});
 
 		JLabel lblCdigo = new JLabel("C\u00F3digo: ");
-		lblCdigo.setBounds(10, 32, 46, 14);
+		lblCdigo.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblCdigo.setBounds(10, 84, 94, 14);
 		painelFundo.add(lblCdigo);
 
 		txCodigo = new JTextField();
-		txCodigo.setBounds(10, 47, 94, 20);
+		txCodigo.setBounds(10, 99, 94, 20);
 		painelFundo.add(txCodigo);
 		txCodigo.setColumns(10);
 
 		JLabel lblNewLabel = new JLabel("Nome da Institui\u00E7\u00E3o: ");
-		lblNewLabel.setBounds(10, 78, 147, 14);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblNewLabel.setBounds(10, 130, 147, 14);
 		painelFundo.add(lblNewLabel);
 
 		txNome = new JTextField();
-		txNome.setBounds(10, 92, 451, 20);
+		txNome.setBounds(10, 144, 569, 20);
 		painelFundo.add(txNome);
 		txNome.setColumns(10);
 
 		JLabel lblAutor = new JLabel("Endere\u00E7o:");
-		lblAutor.setBounds(10, 123, 107, 14);
+		lblAutor.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblAutor.setBounds(10, 175, 107, 14);
 		painelFundo.add(lblAutor);
 
 		txEndereco = new JTextField();
-		txEndereco.setBounds(10, 138, 312, 20);
+		txEndereco.setBounds(10, 190, 465, 20);
 		painelFundo.add(txEndereco);
 		txEndereco.setColumns(10);
 
 		JLabel lblEdio = new JLabel("CNPJ:");
-		lblEdio.setBounds(10, 169, 107, 14);
+		lblEdio.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblEdio.setBounds(10, 221, 107, 14);
 		painelFundo.add(lblEdio);
 
 		txCnpj = new JTextField();
-		txCnpj.setBounds(10, 182, 147, 20);
+		txCnpj.setBounds(10, 234, 147, 20);
 		painelFundo.add(txCnpj);
 		txCnpj.setColumns(10);
 
 		JLabel lblEditora = new JLabel("Telefone: ");
-		lblEditora.setBounds(10, 213, 107, 14);
+		lblEditora.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblEditora.setBounds(175, 221, 107, 14);
 		painelFundo.add(lblEditora);
 
 		txTelefone = new JTextField();
-		txTelefone.setBounds(10, 226, 147, 20);
+		txTelefone.setBounds(175, 234, 147, 20);
 		painelFundo.add(txTelefone);
 		txTelefone.setColumns(10);
 
 		JLabel lblComplemento = new JLabel("Complemento:");
-		lblComplemento.setBounds(10, 257, 107, 14);
+		lblComplemento.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblComplemento.setBounds(10, 265, 107, 14);
 		painelFundo.add(lblComplemento);
 
 		txComplemento = new JTextField();
-		txComplemento.setBounds(10, 273, 451, 20);
+		txComplemento.setBounds(10, 281, 569, 40);
 		painelFundo.add(txComplemento);
 		txComplemento.setColumns(10);
-
-		JButton btnSalvar = new JButton("Salvar");
-
-		btnSalvar.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent arg0) {
-				
-				Instituicao inst = new Instituicao();
-				inst.setNome(txNome.getText());
-				inst.setEndereco(txEndereco.getText());
-				inst.setCnpj(txCnpj.getText());
-				inst.setTelefone(txTelefone.getText());
-				inst.setComplemento(txComplemento.getText());
-				
-				InstituicaoDao dao = new InstituicaoDao();
-				
-				if (!txCodigo.getText().equals("")) {
-					inst.setCodigo(Integer.parseInt(txCodigo.getText()));
-					if (dao.editarInstituicao(inst)) {
-						modelo.removeRow(linhaSelecionada);
-						modelo.addRow(new Object[] { inst.getCodigo(),
-								                     inst.getNome(),
-								                     inst.getEndereco(),
-								                     inst.getCnpj(),
-								                     inst.getTelefone()});
-					}
-				} else {
-					dao.inserirInstituicao(inst);
-					ListaInstituicao lista = new ListaInstituicao();
-					lista.setVisible(true);
-				}
-				dispose();
-			}
-			
-		});
-		btnSalvar.setBounds(487, 87, 94, 30);
-		painelFundo.add(btnSalvar);
-
-		JButton btnLimpar = new JButton("Limpar");
-		btnLimpar.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent arg0) {
-
-				txCodigo.setText("");
-				txNome.setText("");
-				txEndereco.setText("");
-				txCnpj.setText("");
-				txTelefone.setText("");
-				txComplemento.setText("");
-
-			}
-		});
-		btnLimpar.setBounds(487, 123, 94, 30);
-		painelFundo.add(btnLimpar);
 		
 				JLabel lblCadastroDeLivros = new JLabel("Cadastro de Institui\u00E7\u00E3o");
 				lblCadastroDeLivros.setVerticalAlignment(SwingConstants.TOP);
-				lblCadastroDeLivros.setBounds(199, 11, 196, 20);
+				lblCadastroDeLivros.setBounds(208, 11, 196, 20);
 				painelFundo.add(lblCadastroDeLivros);
 				lblCadastroDeLivros.setFont(new Font("Tahoma", Font.BOLD, 16));
 				lblCadastroDeLivros.setForeground(new Color(0, 0, 0));
+				
+				JPanel panel = new JPanel();
+				panel.setBackground(new Color(176, 224, 230));
+				panel.setBounds(0, 0, 621, 55);
+				painelFundo.add(panel);
 	}
 	
 	
@@ -212,5 +222,4 @@ public class CadastroInstituicao extends JFrame {
 		txComplemento.setText(inst.getComplemento());
 
 	}
-	
 }

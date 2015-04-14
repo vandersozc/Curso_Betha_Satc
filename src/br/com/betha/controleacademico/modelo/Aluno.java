@@ -4,13 +4,18 @@ public class Aluno {
 	
 	private int codigo;
 	private String nome;
-	private String cpf;
+	private int cpf;
 	private int matricula;
 	private String telefone;
 	private String email;
 	private String endereco;
 	
+	public NivelEnsino nivel;
 	
+
+	public NivelEnsino getNivel() {
+		return nivel;
+	}
 
 	public int getCodigo() {
 		return codigo;
@@ -20,7 +25,7 @@ public class Aluno {
 		return nome;
 	}
 
-	public String getCpf() {
+	public int getCpf() {
 		return cpf;
 	}
 
@@ -40,6 +45,8 @@ public class Aluno {
 		return endereco;
 	}
 	
+	
+	
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
@@ -48,7 +55,7 @@ public class Aluno {
 		this.nome = nome;
 	}
 
-	public void setCpf(String cpf) {
+	public void setCpf(int cpf) {
 		this.cpf = cpf;
 	}
 
@@ -67,5 +74,11 @@ public class Aluno {
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
+	
+	public void setNivel(NivelEnsino nivel) {
+		this.nivel = nivel;
+	}
+	
+	
 
 }

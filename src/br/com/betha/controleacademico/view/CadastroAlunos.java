@@ -14,8 +14,13 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import br.com.betha.controleacademico.DAO.InstituicaoDao;
-import br.com.betha.controleacademico.modelo.Instituicao;
+import br.com.betha.controleacademico.DAO.AlunoDao;
+import br.com.betha.controleacademico.modelo.Aluno;
+
+import java.awt.SystemColor;
+
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class CadastroAlunos extends JFrame {
 
@@ -26,17 +31,19 @@ public class CadastroAlunos extends JFrame {
 	private JPanel contentPane;
 	private JTextField txCodigo;
 	private JTextField txNome;
-	private JTextField txEndereco;
-	private JTextField txCnpj;
+	private JTextField txMatricula;
+	private JTextField txCpf;
 	private JTextField txTelefone;
-	private JTextField txComplemento;
+	private JTextField txEmail;
 	private DefaultTableModel modelo = new DefaultTableModel();
 	private int linhaSelecionada;
+	private JTextField txEndereco;
 
 	public CadastroAlunos() {
-		setTitle("Cadastro de Instituições de Ensino");
+		setResizable(false);
+		setTitle("Cadastro de Alunos");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 607, 363);
+		setBounds(100, 100, 630, 415);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -45,123 +52,130 @@ public class CadastroAlunos extends JFrame {
 		JPanel painelFundo = new JPanel();
 		painelFundo.setBackground(Color.WHITE);
 		painelFundo.setForeground(Color.BLACK);
-		painelFundo.setBounds(0, 0, 591, 325);
+		painelFundo.setBounds(0, 0, 624, 387);
 		contentPane.add(painelFundo);
 		painelFundo.setLayout(null);
 
 		JPanel panelInferior = new JPanel();
-		panelInferior.setBackground(new Color(176, 196, 222));
-		panelInferior.setBounds(0, 304, 591, 21);
+		panelInferior.setBackground(new Color(176, 224, 230));
+		panelInferior.setBounds(0, 332, 624, 66);
 		painelFundo.add(panelInferior);
+		panelInferior.setLayout(null);
+		
+				JButton btnSalvar = new JButton("Salvar");
+				btnSalvar.setFont(new Font("Tahoma", Font.BOLD, 13));
+				btnSalvar.setBounds(403, 11, 79, 30);
+				panelInferior.add(btnSalvar);
+				
+						JButton btnLimpar = new JButton("Limpar");
+						btnLimpar.setFont(new Font("Tahoma", Font.BOLD, 13));
+						btnLimpar.setBounds(501, 11, 85, 30);
+						panelInferior.add(btnLimpar);
+						btnLimpar.addActionListener(new ActionListener() {
 
-		JLabel lblDesenvolvidoPorVanderson = new JLabel("Desenvolvido por Vanderson Campanholi");
-		lblDesenvolvidoPorVanderson.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		lblDesenvolvidoPorVanderson.setForeground(new Color(0, 0, 0));
-		panelInferior.add(lblDesenvolvidoPorVanderson);
+							public void actionPerformed(ActionEvent arg0) {
+
+								txCodigo.setText("");
+								txNome.setText("");
+								txMatricula.setText("");
+								txCpf.setText("");
+								txTelefone.setText("");
+								txEmail.setText("");
+								txEndereco.setText("");
+
+							}
+						});
+				
+						btnSalvar.addActionListener(new ActionListener() {
+				
+							public void actionPerformed(ActionEvent arg0) {
+								
+								Aluno al = new Aluno();
+								al.setNome(txNome.getText());
+								al.setCpf(Integer.parseInt(txCpf.getText()));
+								al.setMatricula(Integer.parseInt(txMatricula.getText()));
+								al.setTelefone(txTelefone.getText());
+								al.setEmail(txEmail.getText());
+								al.setEndereco(txEndereco.getText());
+								//al.setNivel(tx);
+								
+								AlunoDao dao = new AlunoDao();
+								
+								if (!txCodigo.getText().equals("")) {
+									al.setCodigo(Integer.parseInt(txCodigo.getText()));
+//									if (dao.editarInstituicao(al)) {
+//										modelo.removeRow(linhaSelecionada);
+//										modelo.addRow(new Object[] { al.getCodigo(), al.getNome(), al.getEndereco() });
+//									}
+//								} else {
+									dao.inserirALuno(al);
+									//ListaInstituicao lista = new ListaInstituicao();
+									//lista.setVisible(true);
+								}
+								dispose();
+							}
+							
+						});
 
 		JLabel lblCdigo = new JLabel("C\u00F3digo: ");
-		lblCdigo.setBounds(10, 32, 46, 14);
+		lblCdigo.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblCdigo.setBounds(10, 58, 94, 14);
 		painelFundo.add(lblCdigo);
 
 		txCodigo = new JTextField();
-		txCodigo.setBounds(10, 47, 94, 20);
+		txCodigo.setBounds(10, 77, 94, 20);
 		painelFundo.add(txCodigo);
 		txCodigo.setColumns(10);
 
-		JLabel lblNewLabel = new JLabel("Nome da Institui\u00E7\u00E3o: ");
-		lblNewLabel.setBounds(10, 78, 147, 14);
-		painelFundo.add(lblNewLabel);
+		JLabel lblNome = new JLabel("Nome do Aluno: ");
+		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblNome.setBounds(10, 108, 147, 14);
+		painelFundo.add(lblNome);
 
 		txNome = new JTextField();
-		txNome.setBounds(10, 92, 451, 20);
+		txNome.setBounds(10, 122, 572, 20);
 		painelFundo.add(txNome);
 		txNome.setColumns(10);
 
-		JLabel lblAutor = new JLabel("Endere\u00E7o:");
-		lblAutor.setBounds(10, 123, 107, 14);
-		painelFundo.add(lblAutor);
+		JLabel lblMatricula = new JLabel("Matr\u00EDcula:");
+		lblMatricula.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblMatricula.setBounds(10, 153, 107, 14);
+		painelFundo.add(lblMatricula);
 
-		txEndereco = new JTextField();
-		txEndereco.setBounds(10, 138, 312, 20);
-		painelFundo.add(txEndereco);
-		txEndereco.setColumns(10);
+		txMatricula = new JTextField();
+		txMatricula.setBounds(10, 168, 112, 20);
+		painelFundo.add(txMatricula);
+		txMatricula.setColumns(10);
 
-		JLabel lblEdio = new JLabel("CNPJ:");
-		lblEdio.setBounds(10, 169, 107, 14);
-		painelFundo.add(lblEdio);
+		JLabel lblCpf = new JLabel("CPF:");
+		lblCpf.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblCpf.setBounds(288, 155, 107, 14);
+		painelFundo.add(lblCpf);
 
-		txCnpj = new JTextField();
-		txCnpj.setBounds(10, 182, 147, 20);
-		painelFundo.add(txCnpj);
-		txCnpj.setColumns(10);
+		txCpf = new JTextField();
+		txCpf.setBounds(288, 168, 147, 20);
+		painelFundo.add(txCpf);
+		txCpf.setColumns(10);
 
-		JLabel lblEditora = new JLabel("Telefone: ");
-		lblEditora.setBounds(10, 213, 107, 14);
-		painelFundo.add(lblEditora);
+		JLabel lblTelefone = new JLabel("Telefone: ");
+		lblTelefone.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblTelefone.setBounds(445, 153, 107, 14);
+		painelFundo.add(lblTelefone);
 
 		txTelefone = new JTextField();
-		txTelefone.setBounds(10, 226, 147, 20);
+		txTelefone.setBounds(445, 168, 137, 20);
 		painelFundo.add(txTelefone);
 		txTelefone.setColumns(10);
 
-		JLabel lblComplemento = new JLabel("Complemento:");
-		lblComplemento.setBounds(10, 257, 107, 14);
-		painelFundo.add(lblComplemento);
+		JLabel lblEmail = new JLabel("Complemento:");
+		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblEmail.setBounds(10, 245, 107, 14);
+		painelFundo.add(lblEmail);
 
-		txComplemento = new JTextField();
-		txComplemento.setBounds(10, 273, 451, 20);
-		painelFundo.add(txComplemento);
-		txComplemento.setColumns(10);
-
-		JButton btnSalvar = new JButton("Salvar");
-
-		btnSalvar.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent arg0) {
-				
-				Instituicao inst = new Instituicao();
-				inst.setNome(txNome.getText());
-				inst.setEndereco(txEndereco.getText());
-				inst.setCnpj(txCnpj.getText());
-				inst.setTelefone(txTelefone.getText());
-				inst.setComplemento(txComplemento.getText());
-				
-				InstituicaoDao dao = new InstituicaoDao();
-				
-				if (!txCodigo.getText().equals("")) {
-					inst.setCodigo(Integer.parseInt(txCodigo.getText()));
-					if (dao.editarInstituicao(inst)) {
-						modelo.removeRow(linhaSelecionada);
-						modelo.addRow(new Object[] { inst.getCodigo(), inst.getNome(), inst.getEndereco() });
-					}
-				} else {
-					dao.inserirInstituicao(inst);
-					//ListaInstituicao lista = new ListaInstituicao();
-					//lista.setVisible(true);
-				}
-				dispose();
-			}
-			
-		});
-		btnSalvar.setBounds(487, 87, 94, 30);
-		painelFundo.add(btnSalvar);
-
-		JButton btnLimpar = new JButton("Limpar");
-		btnLimpar.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent arg0) {
-
-				txCodigo.setText("");
-				txNome.setText("");
-				txEndereco.setText("");
-				txCnpj.setText("");
-				txTelefone.setText("");
-				txComplemento.setText("");
-
-			}
-		});
-		btnLimpar.setBounds(487, 123, 94, 30);
-		painelFundo.add(btnLimpar);
+		txEmail = new JTextField();
+		txEmail.setBounds(10, 270, 572, 44);
+		painelFundo.add(txEmail);
+		txEmail.setColumns(10);
 		
 				JLabel lblCadastroDeLivros = new JLabel("Cadastro de Alunos");
 				lblCadastroDeLivros.setVerticalAlignment(SwingConstants.TOP);
@@ -169,16 +183,42 @@ public class CadastroAlunos extends JFrame {
 				painelFundo.add(lblCadastroDeLivros);
 				lblCadastroDeLivros.setFont(new Font("Tahoma", Font.BOLD, 16));
 				lblCadastroDeLivros.setForeground(new Color(0, 0, 0));
+				
+				JPanel panel = new JPanel();
+				panel.setBackground(new Color(176, 224, 230));
+				panel.setBounds(0, 0, 624, 55);
+				painelFundo.add(panel);
+				
+				JLabel lblEndereco = new JLabel("Endere\u00E7o:");
+				lblEndereco.setFont(new Font("Tahoma", Font.PLAIN, 13));
+				lblEndereco.setBounds(10, 199, 107, 14);
+				painelFundo.add(lblEndereco);
+				
+				txEndereco = new JTextField();
+				txEndereco.setColumns(10);
+				txEndereco.setBounds(10, 214, 572, 20);
+				painelFundo.add(txEndereco);
+				
+				JComboBox cbbNivel = new JComboBox();
+				cbbNivel.setFont(new Font("Tahoma", Font.PLAIN, 11));
+				cbbNivel.setModel(new DefaultComboBoxModel(new String[] {"Ensino M\u00E9dio", "Ensino Fundamental", "Ensino T\u00E9cnico", "Ensino Superior"}));
+				cbbNivel.setBounds(132, 168, 146, 20);
+				painelFundo.add(cbbNivel);
+				
+				JLabel lblNivel = new JLabel("N\u00EDvel:");
+				lblNivel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+				lblNivel.setBounds(134, 153, 119, 14);
+				painelFundo.add(lblNivel);
 	}
 	
 	
 	public CadastroAlunos(int codigo, int linhaSelecionada, DefaultTableModel modelo){
 		
 		this();
-//		this.modelo = modelo;
-//		this.linhaSelecionada = linhaSelecionada;
-//		LivroDAO dao = new LivroDAO();
-//		Livro l = dao.listar(codigo);
+		this.modelo = modelo;
+		this.linhaSelecionada = linhaSelecionada;
+		AlunoDao dao = new AlunoDao();
+		//Aluno al = dao.listar(codigo);
 //		txCodigo.setText(l.getTitulo());
 //		txTitulo.setText(l.getTitulo());
 //		txAno.setText((String.valueOf(l.getAnoLancamento())));
@@ -188,5 +228,4 @@ public class CadastroAlunos extends JFrame {
 		
 		
 	}
-	
 }
