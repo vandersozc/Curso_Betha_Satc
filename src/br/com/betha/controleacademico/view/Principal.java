@@ -2,21 +2,15 @@ package br.com.betha.controleacademico.view;
 
 import java.awt.Color;
 import java.awt.EventQueue;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.GrayFilter;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -130,6 +124,60 @@ public class Principal extends JFrame {
 			}
 		});
 		mnAlunos.add(mntmListar_1);
+		
+		JMenu mnControle = new JMenu("Controle");
+		mnControle.setForeground(new Color(0, 0, 0));
+		mnControle.setHorizontalAlignment(SwingConstants.CENTER);
+		mnControle.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		menuBar.add(mnControle);
+		
+		JMenuItem mntmEnsinoMdio = new JMenuItem("Ensino M\u00E9dio");
+		mntmEnsinoMdio.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+				
+				ControleMedio medio = new ControleMedio();
+				medio.setVisible(true);
+			}
+		});
+		mntmEnsinoMdio.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		mnControle.add(mntmEnsinoMdio);
+		
+		JMenuItem mntmEnsinofundamental = new JMenuItem("Ensino Fundamental");
+		mntmEnsinofundamental.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+				
+				ControleFundamental fund = new ControleFundamental();
+				fund.setVisible(true);
+			}
+		});
+		mntmEnsinofundamental.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		mnControle.add(mntmEnsinofundamental);
+		
+		JMenuItem mntmEnsinoSuperior = new JMenuItem("Ensino Superior");
+		mntmEnsinoSuperior.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+				
+				ControleSuperior sup = new ControleSuperior();
+				sup.setVisible(true);
+			}
+		});
+		mntmEnsinoSuperior.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		mnControle.add(mntmEnsinoSuperior);
+		
+		JMenuItem mntmEnsinoTcnico = new JMenuItem("Ensino T\u00E9cnico");
+		mntmEnsinoTcnico.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+				
+				ControleTecnico tec = new ControleTecnico();
+				tec.setVisible(true);
+			}
+		});
+		mntmEnsinoTcnico.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		mnControle.add(mntmEnsinoTcnico);
 		
 		JMenu mnSobre = new JMenu("Sobre");
 		mnSobre.setForeground(new Color(0, 0, 0));
