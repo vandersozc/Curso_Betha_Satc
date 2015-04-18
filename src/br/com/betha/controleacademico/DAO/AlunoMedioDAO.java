@@ -2,7 +2,10 @@ package br.com.betha.controleacademico.DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -13,7 +16,7 @@ public class AlunoMedioDAO {
 	private static final String INSERT = "insert into ensino_medio (codigo, periodo, venc_matricula, percent_desc, percent_acresc, observacao) values (SEQ_ALUNO_MEDIO.nextval, ?, ?, ?, ?, ?)";
 	private static final String DELETE = "delete from ensino_medio where codigo = ?";
 	private static final String UPDATE = "update ensino_medio set periodo = ?, venc_matricula = ?, percent_desc = ?, percent_acresc = ?, observacao = ? where codigo = ?";
-	
+	private static final String SELECT = "select * from ensino_medio";
 	
 	public boolean inserirAlunoMedio(AlunoMedio medio){
 		Connection con = null;
@@ -102,6 +105,40 @@ public class AlunoMedioDAO {
 		}
 		return false;
 	}
+	
+	public List<AlunoMedio> listarAlunoMedio() {
+
+		Connection con = null;
+		List<AlunoMedio> medio = new ArrayList<>();
+
+		try {
+			con = Conexao.setConexao();
+			PreparedStatement pstm = con.prepareStatement(SELECT);
+			ResultSet rs = pstm.executeQuery();
+			while (rs.next()) {
+				AlunoMedio al = new AlunoMedio();
+				
+				al.setCodigo(rs.getInt("codigo"));
+				al.setPeriodo(rs.getString("periodo"));
+				al.setVencMatricula(rs.getString("venc_matricula"));
+				al.setPercentDesc(Double.parseDouble(rs.getString("percent_desc")));
+				al.setPercentAcresc(Double.parseDouble(rs.getString("percent_acresc")));
+				medio.add(al);
+			}
+			return medio;
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Não foi possível listar os controles!");
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				con.close();
+			} catch (Exception e2) {
+				System.out.println("Erro ao fechar a conexão");
+			}
+		}
+		return null;
+	}
+	
 	
 	public void SemDados(){	
 		JOptionPane.showMessageDialog(null, "Nenhum registro selecionado!");

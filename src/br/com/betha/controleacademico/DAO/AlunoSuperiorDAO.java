@@ -2,7 +2,10 @@ package br.com.betha.controleacademico.DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -13,7 +16,7 @@ public class AlunoSuperiorDAO {
 	private static final String INSERT = "insert into ensino_superior (codigo, periodo, venc_matricula, percent_desc, percent_acresc, observacao) values (SEQ_ALUNO_SUPERIOR.nextval, ?, ?, ?, ?, ?)";
 	private static final String DELETE = "delete from ensino_superior where codigo = ?";
 	private static final String UPDATE = "update ensino_superior set periodo = ?, venc_matricula = ?, percent_desc = ?, percent_acresc = ?, observacao = ? where codigo = ?";
-
+	private static final String SELECT = "select * from ensino_superior";
 	
 	public boolean inserirAlunoSuperior(AlunoSuperior superior) {
 		Connection con = null;
@@ -98,6 +101,39 @@ public class AlunoSuperiorDAO {
 			}
 		}
 		return false;
+	}
+	
+	public List<AlunoSuperior> listarAlunoSuperior() {
+
+		Connection con = null;
+		List<AlunoSuperior> superior = new ArrayList<>();
+
+		try {
+			con = Conexao.setConexao();
+			PreparedStatement pstm = con.prepareStatement(SELECT);
+			ResultSet rs = pstm.executeQuery();
+			while (rs.next()) {
+				AlunoSuperior sup = new AlunoSuperior();
+				
+				sup.setCodigo(rs.getInt("codigo"));
+				sup.setPeriodo(rs.getString("periodo"));
+				sup.setVencMatricula(rs.getString("venc_matricula"));
+				sup.setPercentDesc(Double.parseDouble(rs.getString("percent_desc")));
+				sup.setPercentAcresc(Double.parseDouble(rs.getString("percent_acresc")));
+				superior.add(sup);
+			}
+			return superior;
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Não foi possível listar os controles!");
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				con.close();
+			} catch (Exception e2) {
+				System.out.println("Erro ao fechar a conexão");
+			}
+		}
+		return null;
 	}
 	
 	public void SemDados(){	

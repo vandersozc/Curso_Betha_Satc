@@ -2,7 +2,10 @@ package br.com.betha.controleacademico.DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -13,7 +16,8 @@ public class AlunoTecnicoDAO {
 	private static final String INSERT = "insert into ensino_tecnico (codigo, periodo, venc_matricula, percent_desc, percent_acresc, observacao) values (SEQ_ALUNO_TECNICO.nextval, ?, ?, ?, ?, ?)";
 	private static final String DELETE = "delete from ensino_tecnico where codigo = ?";
 	private static final String UPDATE = "update ensino_tecnico set periodo = ?, venc_matricula = ?, percent_desc = ?, percent_acresc = ?, observacao = ? where codigo = ?";
-
+	private static final String SELECT = "select * from ensino_tecnico";
+	
 	public boolean inserirAlunoTecnico(AlunoTecnico tecnico) {
 		Connection con = null;
 		
@@ -100,6 +104,40 @@ public class AlunoTecnicoDAO {
 			}
 		}
 		return false;
+	}
+	
+	
+	public List<AlunoTecnico> listarAlunoTecnico() {
+
+		Connection con = null;
+		List<AlunoTecnico> tecnico = new ArrayList<>();
+
+		try {
+			con = Conexao.setConexao();
+			PreparedStatement pstm = con.prepareStatement(SELECT);
+			ResultSet rs = pstm.executeQuery();
+			while (rs.next()) {
+				AlunoTecnico tec = new AlunoTecnico();
+				
+				tec.setCodigo(rs.getInt("codigo"));
+				tec.setPeriodo(rs.getString("periodo"));
+				tec.setVencMatricula(rs.getString("venc_matricula"));
+				tec.setPercentDesc(Double.parseDouble(rs.getString("percent_desc")));
+				tec.setPercentAcresc(Double.parseDouble(rs.getString("percent_acresc")));
+				tecnico.add(tec);
+			}
+			return tecnico;
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Não foi possível listar os controles!");
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				con.close();
+			} catch (Exception e2) {
+				System.out.println("Erro ao fechar a conexão");
+			}
+		}
+		return null;
 	}
 	
 	public void SemDados(){	

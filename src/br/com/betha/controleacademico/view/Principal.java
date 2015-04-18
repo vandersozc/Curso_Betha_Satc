@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -181,6 +180,17 @@ public class Principal extends JFrame {
 		});
 		mntmEnsinoTcnico.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		mnControle.add(mntmEnsinoTcnico);
+		
+		JMenuItem mntmListarControles = new JMenuItem("Listar Controles");
+		mntmListarControles.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		mntmListarControles.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+				ListaControles listaControles = new ListaControles();
+				listaControles.setVisible(true);
+			}
+		});
+		mnControle.add(mntmListarControles);
 		
 		JMenu mnSobre = new JMenu("Sobre");
 
