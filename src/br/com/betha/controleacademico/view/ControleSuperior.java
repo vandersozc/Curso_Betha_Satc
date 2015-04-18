@@ -4,10 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,10 +13,10 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import br.com.betha.controleacademico.DAO.AlunoMedioDAO;
+import br.com.betha.controleacademico.DAO.AlunoSuperiorDAO;
 import br.com.betha.controleacademico.modelo.AlunoMedio;
-
-import java.awt.Window.Type;
-import java.awt.Dialog.ModalExclusionType;
+import br.com.betha.controleacademico.modelo.AlunoSuperior;
 
 public class ControleSuperior extends JFrame {
 
@@ -71,7 +67,16 @@ public class ControleSuperior extends JFrame {
 						
 						JButton btnExcluir = new JButton("Excluir");
 						btnExcluir.addActionListener(new ActionListener() {
+							
 							public void actionPerformed(ActionEvent arg0) {
+								AlunoSuperiorDAO dao = new AlunoSuperiorDAO();
+								
+								if (!txCodigo.getText().equals("")) {
+									int codigo = Integer.parseInt(txCodigo.getText());
+									dao.deleteAlunoSuperior(codigo);
+								} else {
+									dao.SemDados();
+								}
 							}
 						});
 						btnExcluir.setFont(new Font("Tahoma", Font.BOLD, 13));
@@ -95,36 +100,23 @@ public class ControleSuperior extends JFrame {
 				
 							public void actionPerformed(ActionEvent arg0) {
 								
-								AlunoMedio am = new AlunoMedio();
+							    AlunoSuperior sup = new AlunoSuperior();   
 								
-								DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");   
+								sup.setPeriodo(txPeriodo.getText());
+								sup.setVencMatricula(txVencimentoMat.getText());
+								sup.setPercentDesc(Double.parseDouble(txPercDesc.getText()));
+								sup.setPercentAcresc(Double.parseDouble(txPercAcre.getText()));
+								sup.setObservacao(txObs.getText());
 								
-								am.setPeriodo(txPeriodo.getText());
-								am.setPercentDesc(Double.parseDouble(txPercDesc.getText()));
-								am.setPercentAcresc(Double.parseDouble(txPercAcre.getText()));
-								am.setObservacao(txObs.getText());
+								AlunoSuperiorDAO dao = new AlunoSuperiorDAO();
 								
-								//am.setVencMatricula(txVencimentoMat.getText());
-								try {
-									Date date = (Date)formatter.parse(txVencimentoMat.getText());
-								} catch (ParseException e) {
-									e.printStackTrace();
+								if (!txCodigo.getText().equals("")) {
+									sup.setCodigo(Integer.parseInt(txCodigo.getText()));
+									dao.editarAlunoSuperior(sup);
+								} else {
+									dao.inserirAlunoSuperior(sup);
 								}
-								
-								//AlunoDao dao = new AlunoDao();
-								
-								//if (!txCodigo.getText().equals("")) {
-								//	al.setCodigo(Integer.parseInt(txCodigo.getText()));
-//									if (dao.editarInstituicao(al)) {
-//										modelo.removeRow(linhaSelecionada);
-//										modelo.addRow(new Object[] { al.getCodigo(), al.getNome(), al.getEndereco() });
-//									}
-//								} else {
-									//dao.inserirALuno(al);
-									//ListaInstituicao lista = new ListaInstituicao();
-									//lista.setVisible(true);
-								//}
-								//dispose();
+								dispose();
 							}
 							
 						});

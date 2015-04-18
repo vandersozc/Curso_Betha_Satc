@@ -1,12 +1,11 @@
 package br.com.betha.controleacademico.modelo;
 
-import sun.util.calendar.LocalGregorianCalendar.Date;
 
 public class AlunoTecnico {
 
 	private int codigo;
 	private String periodo;
-	private Date vencMatricula;
+	private String vencMatricula;
 	private Double percentDesc;
 	private Double percentAcresc;
 	private String Observacao;
@@ -18,7 +17,7 @@ public class AlunoTecnico {
 	public String getPeriodo() {
 		return periodo;
 	}
-	public Date getVencMatricula() {
+	public String getVencMatricula() {
 		return vencMatricula;
 	}
 	public Double getPercentDesc() {
@@ -36,7 +35,7 @@ public class AlunoTecnico {
 	public void setPeriodo(String periodo) {
 		this.periodo = periodo;
 	}
-	public void setVencMatricula(Date vencMatricula) {
+	public void setVencMatricula(String vencMatricula) {
 		this.vencMatricula = vencMatricula;
 	}
 	public void setPercentDesc(Double percentDesc) {
@@ -48,6 +47,5 @@ public class AlunoTecnico {
 	public void setObservacao(String observacao) {
 		Observacao = observacao;
 	}
-
 	
 }

@@ -33,25 +33,7 @@ public class CadastroInstituicao extends JFrame {
 	private DefaultTableModel modelo = new DefaultTableModel();
 	private int linhaSelecionada;
 
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					CadastroInstituicao frame = new CadastroInstituicao();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
-	/**
-	 * Create the frame.
-	 */
+	 
 	public CadastroInstituicao() {
 		setResizable(false);
 		setTitle("Cadastro de Instituições de Ensino");
