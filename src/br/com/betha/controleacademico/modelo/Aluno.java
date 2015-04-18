@@ -13,10 +13,6 @@ public class Aluno {
 	public NivelEnsino nivel;
 	
 
-	public NivelEnsino getNivel() {
-		return nivel;
-	}
-
 	public int getCodigo() {
 		return codigo;
 	}
@@ -44,9 +40,7 @@ public class Aluno {
 	public String getEndereco() {
 		return endereco;
 	}
-	
-	
-	
+
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
@@ -73,12 +67,7 @@ public class Aluno {
 
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
-	}
-	
-	public void setNivel(NivelEnsino nivel) {
-		this.nivel = nivel;
-	}
-	
+	}	
 	
 
 }

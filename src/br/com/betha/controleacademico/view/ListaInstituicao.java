@@ -73,7 +73,7 @@ public class ListaInstituicao extends JFrame {
 					inst.setVisible(true);
 					
 				} else {
-					JOptionPane.showMessageDialog(null, "É necessário selecionar uma instituição para alterar");
+					JOptionPane.showMessageDialog(null, "É necessário selecionar uma instituição para alterar!");
 				}
 				
 			}
@@ -99,7 +99,7 @@ public class ListaInstituicao extends JFrame {
 					}
 					
 				} else {
-					JOptionPane.showMessageDialog(null, "É necessário selecionar uma institução para remoção");
+					JOptionPane.showMessageDialog(null, "É necessário selecionar uma institução para remover!");
 				}
 				
 			}

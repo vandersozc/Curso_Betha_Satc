@@ -73,7 +73,7 @@ public class ListaAluno extends JFrame {
 					al.setVisible(true);
 					
 				} else {
-					JOptionPane.showMessageDialog(null, "É necessário selecionar um aluno para alterar");
+					JOptionPane.showMessageDialog(null, "É necessário selecionar um aluno para alterar!");
 				}
 				
 			}
@@ -99,7 +99,7 @@ public class ListaAluno extends JFrame {
 					}
 					
 				} else {
-					JOptionPane.showMessageDialog(null, "É necessário selecionar um aluno para remover");
+					JOptionPane.showMessageDialog(null, "É necessário selecionar um aluno para remover!");
 				}
 				
 			}
@@ -118,11 +118,11 @@ public class ListaAluno extends JFrame {
 				for (Aluno al : dao.listarAluno()) {
 					modelo.addRow(new Object[]{al.getCodigo(),
 											   al.getNome(),
-											   al.getMatricula(),
-											   al.getEndereco(),
 											   al.getCpf(),
-											   al.getEmail(),
-											   al.getTelefone()});
+											   al.getMatricula(),
+											   al.getTelefone(),
+											   al.getEndereco(),
+											   al.getEmail()});
 				}
 			}
 		});
@@ -134,7 +134,7 @@ public class ListaAluno extends JFrame {
 		scrollPane.setBounds(10, 105, 689, 269);
 		painelFundo.add(scrollPane);
 		
-				JLabel lblCadastroDeLivros = new JLabel("Lista de Institui\u00E7\u00F5es");
+				JLabel lblCadastroDeLivros = new JLabel("Lista de Alunos");
 				lblCadastroDeLivros.setBounds(267, 11, 174, 20);
 				painelFundo.add(lblCadastroDeLivros);
 				lblCadastroDeLivros.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -157,14 +157,11 @@ public class ListaAluno extends JFrame {
 		
 		modelo.addColumn("Código");
 		modelo.addColumn("Nome");
-		modelo.addColumn("Matrícula");
-		modelo.addColumn("Endereço");
 		modelo.addColumn("CPF");
+		modelo.addColumn("Matrícula");
 		modelo.addColumn("Email");
-		modelo.addColumn("Telefone");
-		
+		modelo.addColumn("Endereço");
 		carregarTabela();
-	
 	}
 
 	private void carregarTabela() {
@@ -173,11 +170,11 @@ public class ListaAluno extends JFrame {
 		for (Aluno al : dao.listarAluno()) {
 			modelo.addRow(new Object[]{al.getCodigo(),
 									   al.getNome(),
-									   al.getMatricula(),
-									   al.getEndereco(),
 									   al.getCpf(),
-									   al.getEmail(),
-									   al.getTelefone()});
+									   al.getMatricula(),
+									   al.getTelefone(),
+									   al.getEndereco(),
+									   al.getEmail()});
 			
 		}
 		

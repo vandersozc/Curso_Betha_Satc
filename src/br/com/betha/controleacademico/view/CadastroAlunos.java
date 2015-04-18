@@ -94,20 +94,24 @@ public class CadastroAlunos extends JFrame {
 								al.setTelefone(txTelefone.getText());
 								al.setEmail(txEmail.getText());
 								al.setEndereco(txEndereco.getText());
-								//al.setNivel(tx);
 								
 								AlunoDao dao = new AlunoDao();
 								
 								if (!txCodigo.getText().equals("")) {
 									al.setCodigo(Integer.parseInt(txCodigo.getText()));
-//									if (dao.editarInstituicao(al)) {
-//										modelo.removeRow(linhaSelecionada);
-//										modelo.addRow(new Object[] { al.getCodigo(), al.getNome(), al.getEndereco() });
-//									}
-//								} else {
+									if (dao.editarAluno(al)) {
+										modelo.removeRow(linhaSelecionada);
+										modelo.addRow(new Object[] { al.getCodigo(),
+												                     al.getNome(),
+												                     al.getCpf(),
+												                     al.getMatricula(),
+												                     al.getEmail(),
+												                     al.getTelefone()});
+									}
+								} else {
 									dao.inserirALuno(al);
-									//ListaInstituicao lista = new ListaInstituicao();
-									//lista.setVisible(true);
+									ListaAluno lista = new ListaAluno();
+									lista.setVisible(true);
 								}
 								dispose();
 							}
@@ -164,13 +168,13 @@ public class CadastroAlunos extends JFrame {
 		painelFundo.add(txTelefone);
 		txTelefone.setColumns(10);
 
-		JLabel lblEmail = new JLabel("Complemento:");
+		JLabel lblEmail = new JLabel("Email:");
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblEmail.setBounds(10, 245, 107, 14);
 		painelFundo.add(lblEmail);
 
 		txEmail = new JTextField();
-		txEmail.setBounds(10, 270, 572, 44);
+		txEmail.setBounds(10, 270, 572, 20);
 		painelFundo.add(txEmail);
 		txEmail.setColumns(10);
 		
@@ -214,15 +218,17 @@ public class CadastroAlunos extends JFrame {
 		this();
 		this.modelo = modelo;
 		this.linhaSelecionada = linhaSelecionada;
+		
 		AlunoDao dao = new AlunoDao();
-		//Aluno al = dao.listar(codigo);
-//		txCodigo.setText(l.getTitulo());
-//		txTitulo.setText(l.getTitulo());
-//		txAno.setText((String.valueOf(l.getAnoLancamento())));
-//		txEdicao.setText(l.getEdicao());
-//		txEditora.setText(l.getEditora());
-//		txIsbn.setText(l.getIsbn());
+		Aluno al = dao.listarCodigo(codigo);
 		
-		
+		txCodigo.setText(String.valueOf(al.getCodigo()));
+		txNome.setText(al.getNome());
+		txCpf.setText(String.valueOf(al.getCpf()));
+		txMatricula.setText(String.valueOf(al.getMatricula()));
+		txTelefone.setText(al.getTelefone());
+		txEmail.setText(al.getEmail());
+		txEndereco.setText(al.getEndereco());
+
 	}
 }
