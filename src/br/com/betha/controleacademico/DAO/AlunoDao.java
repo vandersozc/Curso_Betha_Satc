@@ -10,8 +10,6 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import br.com.betha.controleacademico.modelo.Aluno;
-import br.com.betha.controleacademico.modelo.Instituicao;
-import br.com.betha.controleacademico.modelo.NivelEnsino;
 
 public class AlunoDao {
 	
@@ -20,7 +18,6 @@ public class AlunoDao {
 	private static final String UPDATE = "update aluno set nome = ?, cpf = ?, matricula = ?, telefone = ?, email = ?, nivel = ? where codigo = ?";
 	private static final String LIST = "select * from aluno";
 	private static final String LIST_ID = "select * from aluno where codigo = ?";
-	private static final String LIST_TITULO = "";
 	
 	public boolean inserirALuno(Aluno aluno) {
 

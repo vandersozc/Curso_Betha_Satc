@@ -97,8 +97,8 @@ public class ControleTecnico extends JFrame {
 								DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");   
 								
 								am.setPeriodo(txPeriodo.getText());
-								am.setPercentDesc(Integer.parseInt(txPercDesc.getText()));
-								am.setPercentAcresc(Integer.parseInt(txPercAcre.getText()));
+								am.setPercentDesc(Double.parseDouble(txPercDesc.getText()));
+								am.setPercentAcresc(Double.parseDouble(txPercAcre.getText()));
 								am.setObservacao(txObs.getText());
 								
 								//am.setVencMatricula(txVencimentoMat.getText());

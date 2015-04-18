@@ -7,8 +7,8 @@ public class AlunoTecnico {
 	private int codigo;
 	private String periodo;
 	private Date vencMatricula;
-	private int percentDesc;
-	private int percentAcresc;
+	private Double percentDesc;
+	private Double percentAcresc;
 	private String Observacao;
 	
 	
@@ -21,10 +21,10 @@ public class AlunoTecnico {
 	public Date getVencMatricula() {
 		return vencMatricula;
 	}
-	public int getPercentDesc() {
+	public Double getPercentDesc() {
 		return percentDesc;
 	}
-	public int getPercentAcresc() {
+	public Double getPercentAcresc() {
 		return percentAcresc;
 	}
 	public String getObservacao() {
@@ -39,10 +39,10 @@ public class AlunoTecnico {
 	public void setVencMatricula(Date vencMatricula) {
 		this.vencMatricula = vencMatricula;
 	}
-	public void setPercentDesc(int percentDesc) {
+	public void setPercentDesc(Double percentDesc) {
 		this.percentDesc = percentDesc;
 	}
-	public void setPercentAcresc(int percentAcresc) {
+	public void setPercentAcresc(Double percentAcresc) {
 		this.percentAcresc = percentAcresc;
 	}
 	public void setObservacao(String observacao) {
