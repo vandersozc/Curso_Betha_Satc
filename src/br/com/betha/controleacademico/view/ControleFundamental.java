@@ -14,9 +14,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import br.com.betha.controleacademico.DAO.AlunoFundamentalDAO;
-import br.com.betha.controleacademico.DAO.AlunoMedioDAO;
 import br.com.betha.controleacademico.modelo.AlunoFundamental;
-import br.com.betha.controleacademico.modelo.AlunoMedio;
 
 public class ControleFundamental extends JFrame {
 
@@ -41,6 +39,8 @@ public class ControleFundamental extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		this.setLocationRelativeTo(null);
 
 		JPanel painelFundo = new JPanel();
 		painelFundo.setBackground(Color.WHITE);

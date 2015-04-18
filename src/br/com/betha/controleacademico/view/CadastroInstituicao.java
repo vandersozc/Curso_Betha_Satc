@@ -43,6 +43,8 @@ public class CadastroInstituicao extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		this.setLocationRelativeTo(null);
 
 		JPanel painelFundo = new JPanel();
 		painelFundo.setBackground(Color.WHITE);

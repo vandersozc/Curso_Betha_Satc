@@ -13,9 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import br.com.betha.controleacademico.DAO.AlunoMedioDAO;
 import br.com.betha.controleacademico.DAO.AlunoSuperiorDAO;
-import br.com.betha.controleacademico.modelo.AlunoMedio;
 import br.com.betha.controleacademico.modelo.AlunoSuperior;
 
 public class ControleSuperior extends JFrame {
@@ -41,6 +39,8 @@ public class ControleSuperior extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		this.setLocationRelativeTo(null);
 
 		JPanel painelFundo = new JPanel();
 		painelFundo.setBackground(Color.WHITE);

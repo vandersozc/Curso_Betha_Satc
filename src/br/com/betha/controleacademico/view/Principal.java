@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -48,6 +49,8 @@ public class Principal extends JFrame {
 		painelFundo.setBounds(0, 0, 872, 491);
 		contentPane.add(painelFundo);
 		painelFundo.setLayout(null);
+		
+		this.setLocationRelativeTo(null);
 
 		JPanel panelInferior = new JPanel();
 		panelInferior.setBounds(0, 437, 862, 43);
@@ -180,8 +183,20 @@ public class Principal extends JFrame {
 		mnControle.add(mntmEnsinoTcnico);
 		
 		JMenu mnSobre = new JMenu("Sobre");
+
 		mnSobre.setForeground(new Color(0, 0, 0));
 		mnSobre.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		menuBar.add(mnSobre);
+		
+		JMenuItem mntmSobre = new JMenuItem("Sobre");
+		mntmSobre.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		mntmSobre.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+				Sobre sobre = new Sobre();
+				sobre.setVisible(true);
+			}
+		});
+		mnSobre.add(mntmSobre);
 	}
 }
