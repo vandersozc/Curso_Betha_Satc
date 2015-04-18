@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -13,6 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.MaskFormatter;
 
 import br.com.betha.controleacademico.DAO.InstituicaoDao;
 import br.com.betha.controleacademico.modelo.Instituicao;
@@ -27,9 +29,9 @@ public class CadastroInstituicao extends JFrame {
 	private JTextField txCodigo;
 	private JTextField txNome;
 	private JTextField txEndereco;
-	private JTextField txCnpj;
-	private JTextField txTelefone;
 	private JTextField txComplemento;
+	private JFormattedTextField txCnpj;
+	private JFormattedTextField txTelefone;
 	private DefaultTableModel modelo = new DefaultTableModel();
 	private int linhaSelecionada;
 
@@ -150,20 +152,10 @@ public class CadastroInstituicao extends JFrame {
 		lblEdio.setBounds(10, 221, 107, 14);
 		painelFundo.add(lblEdio);
 
-		txCnpj = new JTextField();
-		txCnpj.setBounds(10, 234, 147, 20);
-		painelFundo.add(txCnpj);
-		txCnpj.setColumns(10);
-
 		JLabel lblEditora = new JLabel("Telefone: ");
 		lblEditora.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblEditora.setBounds(175, 221, 107, 14);
 		painelFundo.add(lblEditora);
-
-		txTelefone = new JTextField();
-		txTelefone.setBounds(175, 234, 147, 20);
-		painelFundo.add(txTelefone);
-		txTelefone.setColumns(10);
 
 		JLabel lblComplemento = new JLabel("Complemento:");
 		lblComplemento.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -186,8 +178,25 @@ public class CadastroInstituicao extends JFrame {
 				panel.setBackground(new Color(176, 224, 230));
 				panel.setBounds(0, 0, 621, 55);
 				painelFundo.add(panel);
+				
+				JFormattedTextField txCnpj = new JFormattedTextField((setMascara("##.###.###/####-##")));
+				txCnpj.setBounds(10, 234, 125, 20);
+				painelFundo.add(txCnpj);
+				
+				JFormattedTextField txTelefone = new JFormattedTextField((setMascara("(##) ####-####")));
+				txTelefone.setBounds(175, 234, 107, 20);
+				painelFundo.add(txTelefone);
+
 	}
 	
+	
+	private MaskFormatter setMascara(String mascara){  
+	    MaskFormatter mask = null;  
+	    try{  
+	        mask = new MaskFormatter(mascara);                        
+	        }catch(java.text.ParseException ex){}  
+	    return mask;  
+	}
 	
 	public CadastroInstituicao(int codigo, int linhaSelecionada, DefaultTableModel modelo){
 		

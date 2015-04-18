@@ -17,11 +17,10 @@ public class InstituicaoDao {
 	private static final String UPDATE = "UPDATE INSTITUICAO SET NOME = ?, ENDERECO = ?, CNPJ = ?, TELEFONE = ?, COMPLEMENTO = ? WHERE CODIGO = ?";
 	private static final String SELECT = "SELECT * FROM INSTITUICAO";
 	private static final String SELECT_ID = "SELECT * FROM INSTITUICAO WHERE CODIGO = ?";
-	//private static final String SELECT_NOME = "SELECT * FROM INSTITUICAO WHERE NOME = ?";
+	private static final String SELECT_NOME = "SELECT * FROM INSTITUICAO WHERE NOME = like '% ? %'";
 	
 	
 	public boolean inserirInstituicao(Instituicao instituicao) {
-
 		Connection con = null;
 
 		try {
@@ -52,7 +51,6 @@ public class InstituicaoDao {
 	}
 	
 	public boolean removerInstituicao(int codigo) {
-
 		Connection con = null;
 
 		try {
@@ -78,7 +76,6 @@ public class InstituicaoDao {
 	}
 	
 	public boolean editarInstituicao(Instituicao instituicao) {
-
 		Connection con = null;
 
 		try {
@@ -112,7 +109,6 @@ public class InstituicaoDao {
 	
 	
 	public List<Instituicao> listarInstituicao() {
-
 		Connection con = null;
 		List<Instituicao> Instituicoes = new ArrayList<>();
 
@@ -145,7 +141,6 @@ public class InstituicaoDao {
 	}
 
 	public Instituicao listarCodigo(int codigo) {
-
 		Connection con = null;
 		Instituicao inst = new Instituicao();
 
@@ -166,6 +161,40 @@ public class InstituicaoDao {
 			return inst;
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Não foi possível encontrar a instituição");
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				con.close();
+			} catch (Exception e2) {
+				System.out.println("Erro ao fechar a conexão");
+			}
+		}
+		return null;
+	}
+	
+	public List<Instituicao> listarInstituicaoNome(String nome) {
+		Connection con = null;
+		List<Instituicao> Instituicoes = new ArrayList<>();
+
+		try {
+			con = Conexao.setConexao();
+			PreparedStatement pstm = con.prepareStatement(SELECT_NOME);
+			pstm.setString(1, nome);
+			ResultSet rs = pstm.executeQuery();
+			
+			while (rs.next()) {
+				Instituicao inst = new Instituicao();
+				inst.setCodigo(rs.getInt("codigo"));
+				inst.setNome(rs.getString("nome"));
+				inst.setEndereco(rs.getString("endereco"));
+				inst.setCnpj(rs.getString("cnpj"));
+				inst.setTelefone(rs.getString("telefone"));
+				inst.setComplemento(rs.getString("complemento"));
+				Instituicoes.add(inst);
+			}
+			return Instituicoes;
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Não foi possível listar a instituição");
 			System.out.println(e.getMessage());
 		} finally {
 			try {

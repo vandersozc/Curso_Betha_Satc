@@ -117,7 +117,7 @@ public class ListaInstituicao extends JFrame {
 				InstituicaoDao dao = new InstituicaoDao();
 				modelo.setNumRows(0);
 				
-				for (Instituicao inst : dao.listarInstituicao()) {
+				for (Instituicao inst : dao.listarInstituicaoNome(pesquisa)) {
 					modelo.addRow(new Object[]{inst.getCodigo(),
 											   inst.getNome(),
 											   inst.getEndereco(),

@@ -85,7 +85,7 @@ public class ListaControles extends JFrame {
 		
 		AlunoFundamentalDAO daoFund =  new AlunoFundamentalDAO();
 		for (AlunoFundamental fund : daoFund.listarAlunoFundamental()) {
-			modelo.addRow(new Object[]{fund.getCodigo(),
+			modelo.addRow(new Object[]{"Ensino Fundamental -  " + fund.getCodigo(),
 									   fund.getPeriodo(),
 									   fund.getVencMatricula(),
 									   fund.getPercentDesc(),
@@ -95,7 +95,7 @@ public class ListaControles extends JFrame {
 		
 		AlunoMedioDAO daoMedio =  new AlunoMedioDAO();
 		for (AlunoMedio al : daoMedio.listarAlunoMedio()) {
-			modelo.addRow(new Object[]{al.getCodigo(),
+			modelo.addRow(new Object[]{"Ensino Médio -               " + al.getCodigo(),
 									   al.getPeriodo(),
 									   al.getVencMatricula(),
 									   al.getPercentDesc(),
@@ -105,7 +105,7 @@ public class ListaControles extends JFrame {
 		
 		AlunoTecnicoDAO daoTec =  new AlunoTecnicoDAO();
 		for (AlunoTecnico tec : daoTec.listarAlunoTecnico()) {
-			modelo.addRow(new Object[]{tec.getCodigo(),
+			modelo.addRow(new Object[]{"Ensino Técnico -            " + tec.getCodigo(),
 									   tec.getPeriodo(),
 									   tec.getVencMatricula(),
 									   tec.getPercentDesc(),
@@ -115,7 +115,7 @@ public class ListaControles extends JFrame {
 		
 		AlunoSuperiorDAO daoSup =  new AlunoSuperiorDAO();
 		for (AlunoSuperior sup : daoSup.listarAlunoSuperior()) {
-			modelo.addRow(new Object[]{sup.getCodigo(),
+			modelo.addRow(new Object[]{"Ensino Superior -           " + sup.getCodigo(),
 									   sup.getPeriodo(),
 									   sup.getVencMatricula(),
 									   sup.getPercentDesc(),
