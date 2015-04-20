@@ -87,7 +87,8 @@ public class AlunoDao {
 			pstm.setString(4, aluno.getTelefone());
 			pstm.setString(5, aluno.getEmail());
 			pstm.setString(6, aluno.getEndereco());
-			pstm.setInt(7, aluno.getCodigo());
+			pstm.setString(7, aluno.getNivelEnsino());
+			pstm.setInt(8, aluno.getCodigo());
 			pstm.execute();
 			
 			JOptionPane.showMessageDialog(null, "Aluno alterado com sucesso!");
@@ -175,6 +176,4 @@ public class AlunoDao {
 		return null;
 	}
 	
-	
-
 }

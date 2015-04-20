@@ -30,10 +30,10 @@ public class CadastroInstituicao extends JFrame {
 	private JTextField txNome;
 	private JTextField txEndereco;
 	private JTextField txComplemento;
-	private JFormattedTextField txCnpj;
-	private JFormattedTextField txTelefone;
 	private DefaultTableModel modelo = new DefaultTableModel();
 	private int linhaSelecionada;
+	private JTextField txCnpj;
+	private JTextField txTelefone;
 
 	 
 	public CadastroInstituicao() {
@@ -179,23 +179,16 @@ public class CadastroInstituicao extends JFrame {
 				panel.setBounds(0, 0, 621, 55);
 				painelFundo.add(panel);
 				
-				JFormattedTextField txCnpj = new JFormattedTextField((setMascara("##.###.###/####-##")));
-				txCnpj.setBounds(10, 234, 125, 20);
+				txCnpj = new JTextField();
+				txCnpj.setBounds(10, 234, 107, 20);
 				painelFundo.add(txCnpj);
+				txCnpj.setColumns(10);
 				
-				JFormattedTextField txTelefone = new JFormattedTextField((setMascara("(##) ####-####")));
+				txTelefone = new JTextField();
 				txTelefone.setBounds(175, 234, 107, 20);
 				painelFundo.add(txTelefone);
+				txTelefone.setColumns(10);
 
-	}
-	
-	
-	private MaskFormatter setMascara(String mascara){  
-	    MaskFormatter mask = null;  
-	    try{  
-	        mask = new MaskFormatter(mascara);                        
-	        }catch(java.text.ParseException ex){}  
-	    return mask;  
 	}
 	
 	public CadastroInstituicao(int codigo, int linhaSelecionada, DefaultTableModel modelo){

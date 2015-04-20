@@ -9,9 +9,9 @@ public class Aluno {
 	private String telefone;
 	private String email;
 	private String endereco;
+	private String NivelEnsino;
 	
 	public NivelEnsino nivel;
-	
 
 	public int getCodigo() {
 		return codigo;
@@ -41,6 +41,10 @@ public class Aluno {
 		return endereco;
 	}
 
+	public String getNivelEnsino() {
+		return NivelEnsino;
+	}
+
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
@@ -67,7 +71,10 @@ public class Aluno {
 
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
-	}	
-	
+	}
+
+	public void setNivelEnsino(String nivelEnsino) {
+		NivelEnsino = nivelEnsino;
+	}
 
 }

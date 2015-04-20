@@ -33,11 +33,11 @@ public class CadastroAlunos extends JFrame {
 	private JTextField txNome;
 	private JTextField txMatricula;
 	private JTextField txEmail;
-	private JFormattedTextField txCpf;
-	private JFormattedTextField txTelefone;
 	private DefaultTableModel modelo = new DefaultTableModel();
 	private int linhaSelecionada;
 	private JTextField txEndereco;
+	private JTextField txCpf;
+	private JTextField txTelefone;
 
 	public CadastroAlunos() {
 		setResizable(false);
@@ -206,21 +206,15 @@ public class CadastroAlunos extends JFrame {
 				lblNivel.setBounds(134, 153, 119, 14);
 				painelFundo.add(lblNivel);
 				
-				JFormattedTextField txCpf = new JFormattedTextField((setMascara("###.###.###-##")));
-				txCpf.setBounds(288, 168, 107, 20);
+				txCpf = new JTextField();
+				txCpf.setBounds(288, 168, 119, 20);
 				painelFundo.add(txCpf);
+				txCpf.setColumns(10);
 				
-				JFormattedTextField txTelefone = new JFormattedTextField((setMascara("(##) ####-####")));
-				txTelefone.setBounds(445, 168, 94, 20);
+				txTelefone = new JTextField();
+				txTelefone.setBounds(445, 168, 107, 20);
 				painelFundo.add(txTelefone);
-	}
-	
-	private MaskFormatter setMascara(String mascara){  
-	    MaskFormatter mask = null;  
-	    try{  
-	        mask = new MaskFormatter(mascara);                        
-	        }catch(java.text.ParseException ex){}  
-	    return mask;  
+				txTelefone.setColumns(10);
 	}
 	
 	
